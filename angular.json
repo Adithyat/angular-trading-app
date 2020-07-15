@@ -115,6 +115,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "trading-app"
+    }
+  },
+  "defaultProject": "trading-app",
+  "cli": {
+    "analytics": "c9aaf4d4-753f-481c-98f2-422e0116526f"
+  }
 }
