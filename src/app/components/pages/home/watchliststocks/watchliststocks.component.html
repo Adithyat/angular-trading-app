@@ -1,0 +1,52 @@
+<section class="stock-list">
+  <h2 class="stock-list__title">Stocks that I follow <a (click)="mshow=!mshow"><span class="stock-list__btn stock-list__btn--add">&#43;</span></a></h2>
+  <div *ngIf="mshow">
+      <div class="modal__overlay"></div>
+      <div class="modal__content">
+          <div (click)="mshow=!mshow" class="modal__close">x</div>
+          <h2 class="modal__h2">Select a new stock to follow</h2>
+          <select class="modal__dropdown">
+              <option value="AMZN">Amazon</option>
+              <option value="DSNY">Disney</option>
+              <option value="HULU">Hulu</option>
+              <option value="NTFLX">Netflix</option>
+          </select>
+          <button class="modal__btn">Add</button>
+      </div>
+  </div>
+  <stockslist [listtype]=0></stockslist>
+</section>
+<div class="modal modal__buy">
+  <div class="modal__overlay"></div>
+  <div class="modal__content modal__content--large">
+      <div class="modal__close">x</div>
+      <h2 class="modal__h2">Buy stock</h2>
+      <select class="modal__dropdown">
+          <option value="AMZN">Amazon</option>
+          <option value="DSNY">Disney</option>
+          <option value="HULU">Hulu</option>
+          <option value="NTFLX">Netflix</option>
+      </select>
+
+      <input class="modal__number-box" type="number" name="quantity" placeholder="enter amount" />
+
+      <button class="modal__btn">Buy</button>
+  </div>
+</div>
+<div class="modal modal__sell">
+  <div class="modal__overlay"></div>
+  <div class="modal__content modal__content--large">
+      <div class="modal__close">x</div>
+      <h2 class="modal__h2">Sell stock</h2>
+      <select class="modal__dropdown">
+          <option value="AMZN">Amazon</option>
+          <option value="DSNY">Disney</option>
+          <option value="HULU">Hulu</option>
+          <option value="NTFLX">Netflix</option>
+      </select>
+
+      <input class="modal__number-box" type="number" name="quantity" placeholder="enter amount" />
+
+      <button class="modal__btn">Sell</button>
+  </div>
+</div>
