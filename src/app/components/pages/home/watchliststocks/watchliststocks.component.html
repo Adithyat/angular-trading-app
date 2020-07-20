@@ -5,13 +5,10 @@
       <div class="modal__content">
           <div (click)="mshow=!mshow" class="modal__close">x</div>
           <h2 class="modal__h2">Select a new stock to follow</h2>
-          <select class="modal__dropdown">
-              <option value="AMZN">Amazon</option>
-              <option value="DSNY">Disney</option>
-              <option value="HULU">Hulu</option>
-              <option value="NTFLX">Netflix</option>
+          <select class="modal__dropdown" [(ngModel)]="follow" name="first" >
+              <option *ngFor="let stock of stocks" value={{stock.symbol}}>{{stock.name}}</option>
           </select>
-          <button class="modal__btn">Add</button>
+          <button (click)="addFollow(follow);mshow=!mshow" class="modal__btn">Add</button>
       </div>
   </div>
   <stockslist [listtype]=0></stockslist>

@@ -1,0 +1,17 @@
+
+<div class="stock-list__grid" *ngFor="let stock of follows; let i = index">
+  <div class="stock-list__grid-row">
+      <div class="stock-list__grid-cell">
+          <a (click)="removeStock(stock)"><span class="stock-list__btn stock-list__btn--remove">&ndash;</span></a>
+      </div>
+      <div class="stock-list__grid-cell">{{stock}}</div>
+      <div class="stock-list__grid-cell">{{(prices[i])}}</div>
+      <div class="stock-list__grid-cell">
+          <a (click)="buyStock(stock)"><span class="btn-transaction btn-transaction--buy">buy</span></a>
+      </div>
+      <div class="stock-list__grid-cell">
+          <a (click)="sellStock(stock)"><span class="btn-transaction btn-transaction--sell">sell</span></a>
+      </div>
+      <div class="stock-list__grid-cell">{{amounts[i]}}</div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-watchlistgraph',
+  selector: 'watchlistgraph',
   templateUrl: './watchlistgraph.component.html',
   styleUrls: ['./watchlistgraph.component.css']
 })
