@@ -7,7 +7,7 @@ const routes: Routes = [
 
   { path: 'home-component', component: HomeComponent },
   { path: 'assets-component', component: AssetsComponent },
-  { path: 'details-component', component: DetailsComponent },
+  { path: 'details-component/:symbol', component: DetailsComponent },
   { path: '**', component: HomeComponent},
 ];
 

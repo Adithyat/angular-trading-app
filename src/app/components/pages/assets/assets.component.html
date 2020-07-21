@@ -4,56 +4,9 @@
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>React Training</title>
+        <title>Angular Training</title>
     </head>
     <body>
-        <section class="stock-transactions full-width" >
-            <div class="stock-transactions__grid-row">
-                <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text stock-transactions__grid-text--white">stock</span></div>
-                <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text stock-transactions__grid-text--white">amount</span></div>
-                <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text stock-transactions__grid-text--white">current price</span></div>
-                <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text stock-transactions__grid-text--white">total</span></div>
-                <div class="stock-transactions__grid-cell"></div>
-            </div>
-            <div class="stock-transactions__grid-row" *ngFor="let symbol of allocations">
-              <stockslist [stocksymbol]="symbol" [listtype]="1"></stockslist>
-            </div>
-        </section>
-
-        <div class="modal modal__buy">
-            <div class="modal__overlay"></div>
-            <div class="modal__content modal__content--large">
-                <div class="modal__close">x</div>
-                <h2 class="modal__h2">Buy stock</h2>
-                <select class="modal__dropdown">
-                    <option value="AMZN">Amazon</option>
-                    <option value="DSNY">Disney</option>
-                    <option value="HULU">Hulu</option>
-                    <option value="NTFLX">Netflix</option>
-                </select>
-
-                <input class="modal__number-box" type="number" name="quantity" placeholder="enter amount" />
-
-                <button class="modal__btn">Buy</button>
-            </div>
-        </div>
-
-        <div class="modal modal__sell">
-            <div class="modal__overlay"></div>
-            <div class="modal__content modal__content--large">
-                <div class="modal__close">x</div>
-                <h2 class="modal__h2">Sell stock</h2>
-                <select class="modal__dropdown">
-                    <option value="AMZN">Amazon</option>
-                    <option value="DSNY">Disney</option>
-                    <option value="HULU">Hulu</option>
-                    <option value="NTFLX">Netflix</option>
-                </select>
-
-                <input class="modal__number-box" type="number" name="quantity" placeholder="enter amount" />
-
-                <button class="modal__btn">Sell</button>
-            </div>
-        </div>
+        <userallocations></userallocations>
     </body>
 </html>
