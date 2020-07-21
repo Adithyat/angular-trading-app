@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StockService } from 'src/app/services'
 
 @Component({
   selector: 'app-assets',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./assets.component.css']
 })
 export class AssetsComponent implements OnInit {
-
-  constructor() { }
+  allocations: string[]=["STRK","INTC"];
+  constructor(private stockService: StockService ) { }
 
   ngOnInit() {
+    //this.stockService.getAllocations().toPromise().then((data) => data.map((s) => this.allocations.push(s.symbol)));
+    // this.stockService
+    // .getAllocations()
+    // .subscribe((data) =>
+    //   data.map((s) => this.allocations.push(s.symbol))
+    // );
+
   }
 
 }

@@ -8,6 +8,7 @@ import { Stock } from "src/app/models/stock";
 })
 export class StockslistComponent implements OnInit {
   @Input() stocksymbol: string;
+  @Input() listtype: number;
   stock: Stock;
 
   constructor(private stockService: StockService) {}

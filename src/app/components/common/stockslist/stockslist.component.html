@@ -1,4 +1,5 @@
-<div class="stock-list__grid-cell">{{ stock.symbol }}</div>
+<div *ngIf="listtype===0">
+  <div class="stock-list__grid-cell">{{ stock.symbol }}</div>
 <div class="stock-list__grid-cell">{{ stock.price }}</div>
 <div class="stock-list__grid-cell">
   <a (click)="buyStock(stocksymbol)"
@@ -11,3 +12,16 @@
   >
 </div>
 <div class="stock-list__grid-cell">{{ stock.allocation }}</div>
+</div>
+
+
+
+<div *ngIf="listtype===1">
+  <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text">{{ stock.symbol }}</span></div>
+  <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text">{{ stock.allocation }}</span></div>
+  <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text">{{ stock.price }}</span></div>
+  <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text">{{ stock.allocation*stock.price }}</span></div>
+  <div class="stock-transactions__grid-cell center">
+      <a><span class="btn-transaction btn-transaction--sell">sell</span></a>
+  </div>
+</div>

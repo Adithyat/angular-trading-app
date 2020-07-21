@@ -259,7 +259,7 @@ a.menu__list-item--active {
 }
 
 .stock-transactions__grid-row {
-    display: table-row;
+
     height: 35px;
     line-height: 35px;
 }
