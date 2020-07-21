@@ -1,12 +1,15 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { environment } from "src/environments/environment";
+
 
 @Injectable({
   providedIn: "root",
 })
 export class WatchlistService {
+  private watchlistSubscription = new Subject();
+
   constructor(private http: HttpClient) {}
 
   getStockList(): Observable<
@@ -24,17 +27,20 @@ export class WatchlistService {
       }[]
     >(`${environment.apiURL}stocks`);
   }
-  getWatchList(): Observable<{ symbol: string }[]> {
-    return this.http.get<{ symbol: string }[]>(
+  listenWatchList(): Subject<{ symbol: string }[]> {
+    this.http.get<{ symbol: string }[]>(
       `${environment.apiURL}userdata/watchlist`,
       environment.user
-    );
+    )
+    .subscribe((data)=> this.watchlistSubscription.next(data));
+    return this.watchlistSubscription as any;
   }
   changeWatchList(symbol: string, action: string) {
-    return this.http.post(
+    this.http.post(
       `${environment.apiURL}userdata/watchlist`,
       { symbol: symbol, action: action },
       environment.user
-    );
+    )
+    .subscribe((data) => this.listenWatchList());;
   }
 }

@@ -20,14 +20,14 @@ export class WatchliststocksComponent implements OnInit {
         data.map((s) => this.stocks.push({ name: s.name, symbol: s.symbol }))
       );
     this.watchlistService
-      .getWatchList()
-      .subscribe((data) => data.map((s) => this.follows.push(s.symbol)));
+      .listenWatchList()
+      .subscribe((data) => this.follows = data.map((s) =>s.symbol));
   }
   addFollow(symbol: string) {
-    this.watchlistService.changeWatchList(symbol, "ADD").subscribe();
+    this.watchlistService.changeWatchList(symbol, "ADD");
   }
   removeStock(symbol: string) {
     console.log(symbol);
-    this.watchlistService.changeWatchList(symbol, "REMOVE").subscribe();
+    this.watchlistService.changeWatchList(symbol, "REMOVE");
   }
 }

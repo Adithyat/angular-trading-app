@@ -12,7 +12,7 @@ export class StockService {
 
   constructor(private http: HttpClient) {}
 
-  getAllocations(): Subject<{ symbol: string; amount: number }[]> {
+  listenAllocations(): Subject<{ symbol: string; amount: number }[]> {
     this.http
       .get<{ symbol: string; amount: number }[]>(
         `${environment.apiURL}userdata/allocations`,
@@ -20,6 +20,14 @@ export class StockService {
       )
       .subscribe((data) => this.allocationSubscription.next(data));
     return this.allocationSubscription as any;
+  }
+  getAllocations(): Observable<{ symbol: string; amount: number }[]> {
+    return this.http
+      .get<{ symbol: string; amount: number }[]>(
+        `${environment.apiURL}userdata/allocations`,
+        environment.user
+      );
+
   }
   getLatestPrice(
     symbol: string
@@ -36,7 +44,7 @@ export class StockService {
       price: null,
     };
     stock.symbol = symbol;
-    this.getAllocations().subscribe((data) => {
+    this.listenAllocations().subscribe((data) => {
       stock.allocation = data.find((d) => d.symbol === symbol).amount;
     });
     setInterval(() => {
@@ -54,6 +62,6 @@ export class StockService {
         { symbol: symbol, side: action, amount: quantity },
         environment.user
       )
-      .subscribe((data) => this.getAllocations());
+      .subscribe((data) => this.listenAllocations());
   }
 }
