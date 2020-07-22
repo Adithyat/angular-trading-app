@@ -7,9 +7,53 @@ import { Chart } from "angular-highcharts";
   styleUrls: ["./stockgraph.component.css"],
 })
 export class StockgraphComponent implements OnInit {
-  seriesOptions = [];
-  seriesCounter = 0;
-  names = ["MSFT", "AAPL", "GOOG"];
+  seriesOptions = [
+    {
+      type: "line",
+      data: [
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+      ],
+    },
+    {
+      type: "line",
+      data: [
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+      ],
+    },
+    {
+      type: "line",
+      data: [
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+        Math.floor(Math.random() * 10),
+      ],
+    },
+  ];
   chart = new Chart({
     chart: {
       type: "line",
@@ -23,13 +67,41 @@ export class StockgraphComponent implements OnInit {
     series: [
       {
         type: "line",
-        name: "Line 1",
-        data: [1, 2, 3],
+        data: [
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+        ],
       },
     ],
   });
   add() {
-    this.chart.addPoint(Math.floor(Math.random() * 10));
+    this.chart.addSeries(
+      {
+        type: "line",
+        data: [
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+          Math.floor(Math.random() * 10),
+        ],
+      },
+      true,
+      false
+    );
   }
 
   constructor() {}

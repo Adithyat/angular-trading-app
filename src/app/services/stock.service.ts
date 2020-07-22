@@ -11,6 +11,7 @@ import { Transaction } from "src/app/models";
 export class StockService {
   private allocationSubscription = new Subject();
   private transactionSubscription = new Subject();
+  private activeSubcriptions = new Map();
 
   constructor(private http: HttpClient) {}
 
@@ -49,11 +50,13 @@ export class StockService {
     this.listenAllocations().subscribe((data) => {
       stock.allocation = data.find((d) => d.symbol === symbol).amount;
     });
-    setInterval(() => {
-      this.getLatestPrice(symbol).subscribe((data) => {
-        stock.price = data.price;
-      });
-    }, 5000);
+    if (!this.activeSubcriptions[symbol]) {
+      this.activeSubcriptions[symbol] = setInterval(() => {
+        this.getLatestPrice(symbol).subscribe((data) => {
+          stock.price = data.price;
+        });
+      }, 10000);
+    }
     return stock;
   }
 
