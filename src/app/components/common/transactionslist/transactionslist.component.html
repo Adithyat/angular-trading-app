@@ -1,9 +1,9 @@
-
-
+<div class="table">
 <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text">tr{{index}}</span></div>
 <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text">{{transaction.symbol}}</span></div>
 <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text">{{transaction.amount}}</span></div>
-<div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text stock-transactions__grid-cell-sell">{{transaction.side}}</span></div>
+<div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text" [ngClass]="{'stock-transactions__grid-cell-buy':transaction.side==='BUY','stock-transactions__grid-cell-sell':transaction.side==='SELL'}">{{transaction.side}}</span></div>
 <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text">{{transaction.tickPrice | number:'.1-2'}}</span></div>
 <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text">{{transaction.cost | number:'0.0-2'}}</span></div>
+</div>
 

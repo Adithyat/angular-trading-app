@@ -2,7 +2,7 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -19,7 +19,7 @@ import {
   StockdetailsComponent,
   StocktransactionsComponent,
   StockdetailgraphComponent,
-  UserallocationsComponent
+  UserallocationsComponent,
 } from "./components";
 
 @NgModule({
@@ -37,7 +37,7 @@ import {
     StocktransactionsComponent,
     StockdetailsComponent,
     StockdetailgraphComponent,
-    UserallocationsComponent
+    UserallocationsComponent,
   ],
   imports: [
     BrowserModule,

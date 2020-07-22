@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiURL:'https://demomocktradingserver.azurewebsites.net/',
-  user: {headers: {'userid':'adithya'}}
+  apiURL: "https://demomocktradingserver.azurewebsites.net/",
+  user: { headers: { userid: "adithya" } },
 };
 
 /*
@@ -15,4 +15,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+// import 'zone.js/dist/zone-error";  // Included with Angular CLI.

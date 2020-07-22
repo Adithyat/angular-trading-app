@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { WatchlistgraphComponent } from './watchlistgraph.component';
+import { WatchlistgraphComponent } from "./watchlistgraph.component";
 
-describe('WatchlistgraphComponent', () => {
+describe("WatchlistgraphComponent", () => {
   let component: WatchlistgraphComponent;
   let fixture: ComponentFixture<WatchlistgraphComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WatchlistgraphComponent ]
-    })
-    .compileComponents();
+      declarations: [WatchlistgraphComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('WatchlistgraphComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

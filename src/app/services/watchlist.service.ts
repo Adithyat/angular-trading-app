@@ -3,7 +3,6 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, Subject } from "rxjs";
 import { environment } from "src/environments/environment";
 
-
 @Injectable({
   providedIn: "root",
 })
@@ -28,19 +27,21 @@ export class WatchlistService {
     >(`${environment.apiURL}stocks`);
   }
   listenWatchList(): Subject<{ symbol: string }[]> {
-    this.http.get<{ symbol: string }[]>(
-      `${environment.apiURL}userdata/watchlist`,
-      environment.user
-    )
-    .subscribe((data)=> this.watchlistSubscription.next(data));
+    this.http
+      .get<{ symbol: string }[]>(
+        `${environment.apiURL}userdata/watchlist`,
+        environment.user
+      )
+      .subscribe((data) => this.watchlistSubscription.next(data));
     return this.watchlistSubscription as any;
   }
   changeWatchList(symbol: string, action: string) {
-    this.http.post(
-      `${environment.apiURL}userdata/watchlist`,
-      { symbol: symbol, action: action },
-      environment.user
-    )
-    .subscribe((data) => this.listenWatchList());;
+    this.http
+      .post(
+        `${environment.apiURL}userdata/watchlist`,
+        { symbol: symbol, action: action },
+        environment.user
+      )
+      .subscribe((data) => this.listenWatchList());
   }
 }

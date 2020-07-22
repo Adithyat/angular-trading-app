@@ -3,8 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Observable, Subject } from "rxjs";
 import { Stock } from "src/app/models";
-import { Transaction } from 'src/app/models';
-
+import { Transaction } from "src/app/models";
 
 @Injectable({
   providedIn: "root",
@@ -22,15 +21,15 @@ export class StockService {
         environment.user
       )
       .subscribe((data) => this.allocationSubscription.next(data));
-    return this.allocationSubscription as Subject<{ symbol: string; amount: number }[]>;
+    return this.allocationSubscription as Subject<
+      { symbol: string; amount: number }[]
+    >;
   }
   getAllocations(): Observable<{ symbol: string; amount: number }[]> {
-    return this.http
-      .get<{ symbol: string; amount: number }[]>(
-        `${environment.apiURL}userdata/allocations`,
-        environment.user
-      );
-
+    return this.http.get<{ symbol: string; amount: number }[]>(
+      `${environment.apiURL}userdata/allocations`,
+      environment.user
+    );
   }
   getLatestPrice(
     symbol: string
@@ -70,10 +69,7 @@ export class StockService {
 
   listenTransactions(): Subject<Transaction[]> {
     this.http
-      .get<Transaction[]>(
-        `${environment.apiURL}transactions`,
-        environment.user
-      )
+      .get<Transaction[]>(`${environment.apiURL}transactions`, environment.user)
       .subscribe((data) => this.transactionSubscription.next(data));
     return this.transactionSubscription as Subject<Transaction[]>;
   }

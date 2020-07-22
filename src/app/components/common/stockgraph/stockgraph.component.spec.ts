@@ -1,16 +1,15 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { StockgraphComponent } from './stockgraph.component';
+import { StockgraphComponent } from "./stockgraph.component";
 
-describe('StockgraphComponent', () => {
+describe("StockgraphComponent", () => {
   let component: StockgraphComponent;
   let fixture: ComponentFixture<StockgraphComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StockgraphComponent ]
-    })
-    .compileComponents();
+      declarations: [StockgraphComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -19,7 +18,7 @@ describe('StockgraphComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

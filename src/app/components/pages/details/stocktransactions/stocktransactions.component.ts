@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { StockService } from 'src/app/services/stock.service'
-import { Transaction } from 'src/app/models';
+import { Component, OnInit, Input } from "@angular/core";
+import { StockService } from "src/app/services/stock.service'
+import { Transaction } from "src/app/models";
 @Component({
   selector: 'stocktransactions',
   templateUrl: './stocktransactions.component.html',

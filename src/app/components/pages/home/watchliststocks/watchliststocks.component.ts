@@ -21,7 +21,7 @@ export class WatchliststocksComponent implements OnInit {
       );
     this.watchlistService
       .listenWatchList()
-      .subscribe((data) => this.follows = data.map((s) =>s.symbol));
+      .subscribe((data) => (this.follows = data.map((s) => s.symbol)));
   }
   addFollow(symbol: string) {
     this.watchlistService.changeWatchList(symbol, "ADD");
