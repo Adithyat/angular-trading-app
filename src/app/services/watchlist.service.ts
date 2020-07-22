@@ -33,7 +33,7 @@ export class WatchlistService {
         environment.user
       )
       .subscribe((data) => this.watchlistSubscription.next(data));
-    return this.watchlistSubscription as any;
+    return this.watchlistSubscription as Subject<{ symbol: string }[]>;
   }
   changeWatchList(symbol: string, action: string) {
     this.http

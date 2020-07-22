@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input, AfterViewInit } from "@angular/core";
 import { Chart } from "angular-highcharts";
 
 @Component({
@@ -6,7 +6,8 @@ import { Chart } from "angular-highcharts";
   templateUrl: "./stockgraph.component.html",
   styleUrls: ["./stockgraph.component.css"],
 })
-export class StockgraphComponent implements OnInit {
+export class StockgraphComponent implements OnInit, AfterViewInit {
+  @Input() stocks: string[];
   seriesOptions = [
     {
       type: "line",
@@ -64,49 +65,39 @@ export class StockgraphComponent implements OnInit {
     credits: {
       enabled: false,
     },
-    series: [
-      {
-        type: "line",
-        data: [
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-        ],
-      },
-    ],
   });
-  add() {
-    this.chart.addSeries(
-      {
-        type: "line",
-        data: [
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-          Math.floor(Math.random() * 10),
-        ],
-      },
-      true,
-      false
-    );
+  add(symbol: string) {
+    console.log(this.stocks);
+    // this.chart.addSeries(
+    //   {
+    //     type: "line",
+    //     name: symbol,
+    //     data: [
+    //       Math.floor(Math.random() * 10),
+    //       Math.floor(Math.random() * 10),
+    //       Math.floor(Math.random() * 10),
+    //       Math.floor(Math.random() * 10),
+    //       Math.floor(Math.random() * 10),
+    //       Math.floor(Math.random() * 10),
+    //       Math.floor(Math.random() * 10),
+    //       Math.floor(Math.random() * 10),
+    //       Math.floor(Math.random() * 10),
+    //       Math.floor(Math.random() * 10),
+    //     ],
+    //   },
+    //   true,
+    //   false
+    // );
   }
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.stocks);
+  }
+  ngAfterViewInit() {
+    console.log(this.stocks);
+  }
 
   // success(data) {
   //   var name = this.url.match(/(msft|aapl|goog)/)[0].toUpperCase();

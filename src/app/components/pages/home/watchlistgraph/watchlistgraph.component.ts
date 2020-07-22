@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { WatchlistService } from "src/app/services";
 
 @Component({
   selector: "watchlistgraph",
@@ -6,7 +7,12 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./watchlistgraph.component.css"],
 })
 export class WatchlistgraphComponent implements OnInit {
-  constructor() {}
+  follows: string[] = [];
+  constructor(private watchlistService: WatchlistService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.watchlistService
+      .listenWatchList()
+      .subscribe((data) => (this.follows = data.map((s): string => s.symbol)));
+  }
 }

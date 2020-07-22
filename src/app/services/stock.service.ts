@@ -55,7 +55,7 @@ export class StockService {
         this.getLatestPrice(symbol).subscribe((data) => {
           stock.price = data.price;
         });
-      }, 10000);
+      }, 5000);
     }
     return stock;
   }

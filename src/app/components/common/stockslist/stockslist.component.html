@@ -6,7 +6,7 @@
       >{{ stock.symbol }}</a
     >
   </div>
-  <div [ngClass]="{ changed: isChanged }" class="stock-list__grid-cell">
+  <div class="stock-list__grid-cell">
     {{ stock.price | number: ".1-2" }}
   </div>
   <div class="stock-list__grid-cell">
