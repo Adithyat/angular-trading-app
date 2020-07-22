@@ -1,34 +1,63 @@
-<div *ngIf="listtype===0">
-  <div class="stock-list__grid-cell"><a [routerLink]="['/details-component', stock.symbol]" routerLinkActive="active">{{ stock.symbol }}</a></div>
-<div class="stock-list__grid-cell">{{ stock.price | number:'.1-2' }}</div>
-<div class="stock-list__grid-cell">
-  <a (click)="buyStock(stocksymbol)"
-    ><span class="btn-transaction btn-transaction--buy">buy</span></a
-  >
-</div>
-<div class="stock-list__grid-cell">
-  <a (click)="sellStock(stocksymbol)"
-    ><span class="btn-transaction btn-transaction--sell">sell</span></a
-  >
-</div>
-<div class="stock-list__grid-cell">{{ stock.allocation }}</div>
-</div>
-
-
-
-<div *ngIf="listtype===1">
-  <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text"><a [routerLink]="['/details-component', stock.symbol]" routerLinkActive="active">{{ stock.symbol }}</a></span></div>
-  <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text">{{ stock.allocation }}</span></div>
-  <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text">{{ stock.price | number:'.1-2' }}</span></div>
-  <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text">{{ stock.allocation*stock.price | number:'.1-2'}}</span></div>
-  <div class="stock-transactions__grid-cell center">
+<div *ngIf="listtype === 0">
+  <div class="stock-list__grid-cell">
+    <a
+      [routerLink]="['/details-component', stock.symbol]"
+      routerLinkActive="active"
+      >{{ stock.symbol }}</a
+    >
+  </div>
+  <div [ngClass]="{ changed: isChanged }" class="stock-list__grid-cell">
+    {{ stock.price | number: ".1-2" }}
+  </div>
+  <div class="stock-list__grid-cell">
+    <input [(ngModel)]="quantity" class="modal__number-box" type="number" />
+  </div>
+  <div class="stock-list__grid-cell">
     <a (click)="buyStock(stocksymbol)"
-    ><span class="btn-transaction btn-transaction--buy">buy</span></a
-  >
-  &nbsp;
-  <a (click)="sellStock(stocksymbol)"
-    ><span class="btn-transaction btn-transaction--sell">sell</span></a
-  >
+      ><span class="btn-transaction btn-transaction--buy">buy</span></a
+    >
+  </div>
+  <div class="stock-list__grid-cell">
+    <a (click)="sellStock(stocksymbol)"
+      ><span class="btn-transaction btn-transaction--sell">sell</span></a
+    >
+  </div>
+  <div class="stock-list__grid-cell">{{ stock.allocation }}</div>
+</div>
+
+<div *ngIf="listtype === 1">
+  <div class="stock-transactions__grid-cell">
+    <span class="stock-transactions__grid-text"
+      ><a
+        [routerLink]="['/details-component', stock.symbol]"
+        routerLinkActive="active"
+        >{{ stock.symbol }}</a
+      ></span
+    >
+  </div>
+  <div class="stock-transactions__grid-cell">
+    <span class="stock-transactions__grid-text">{{ stock.allocation }}</span>
+  </div>
+  <div class="stock-transactions__grid-cell">
+    <span class="stock-transactions__grid-text">{{
+      stock.price | number: ".1-2"
+    }}</span>
+  </div>
+  <div class="stock-transactions__grid-cell">
+    <span class="stock-transactions__grid-text">{{
+      stock.allocation * stock.price | number: ".1-2"
+    }}</span>
+  </div>
+  <div class="stock-transactions__grid-cell center">
+    <input [(ngModel)]="quantity" class="modal__number-box" type="number" />
+    &nbsp;
+    <a (click)="buyStock(stocksymbol)"
+      ><span class="btn-transaction btn-transaction--buy">buy</span></a
+    >
+    &nbsp;
+    <a (click)="sellStock(stocksymbol)"
+      ><span class="btn-transaction btn-transaction--sell">sell</span></a
+    >
   </div>
 </div>
 

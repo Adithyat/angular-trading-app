@@ -3,8 +3,9 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
-
+import { NgxPaginationModule } from "ngx-pagination";
 import { AppRoutingModule } from "./app-routing.module";
+import { ChartModule } from "angular-highcharts";
 import { AppComponent } from "./app.component";
 import {
   StockslistComponent,
@@ -45,6 +46,8 @@ import {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxPaginationModule,
+    ChartModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 
 @Component({
-  selector: "app-stockdetailgraph",
+  selector: "stockdetailgraph",
   templateUrl: "./stockdetailgraph.component.html",
   styleUrls: ["./stockdetailgraph.component.css"],
 })

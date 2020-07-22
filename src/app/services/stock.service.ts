@@ -25,12 +25,12 @@ export class StockService {
       { symbol: string; amount: number }[]
     >;
   }
-  getAllocations(): Observable<{ symbol: string; amount: number }[]> {
-    return this.http.get<{ symbol: string; amount: number }[]>(
-      `${environment.apiURL}userdata/allocations`,
-      environment.user
-    );
-  }
+  // getAllocations(): Observable<{ symbol: string; amount: number }[]> {
+  //   return this.http.get<{ symbol: string; amount: number }[]>(
+  //     `${environment.apiURL}userdata/allocations`,
+  //     environment.user
+  //   );
+  // }
   getLatestPrice(
     symbol: string
   ): Observable<{ stock: string; price: number; date: Date }> {
@@ -53,7 +53,7 @@ export class StockService {
       this.getLatestPrice(symbol).subscribe((data) => {
         stock.price = data.price;
       });
-    }, 3000);
+    }, 5000);
     return stock;
   }
 
@@ -64,13 +64,29 @@ export class StockService {
         { symbol: symbol, side: action, amount: quantity },
         environment.user
       )
-      .subscribe((data) => this.listenAllocations());
+      .subscribe((data) =>
+        this.listenAllocations().subscribe((data) => this.listenTransactions())
+      );
   }
 
   listenTransactions(): Subject<Transaction[]> {
     this.http
       .get<Transaction[]>(`${environment.apiURL}transactions`, environment.user)
-      .subscribe((data) => this.transactionSubscription.next(data));
+      .subscribe((data) =>
+        this.transactionSubscription.next(
+          data.map(
+            (d, i): Transaction => ({
+              id: i,
+              side: d.side,
+              symbol: d.symbol,
+              amount: d.amount,
+              tickPrice: d.tickPrice,
+              cost: d.cost,
+            })
+          )
+        )
+      );
+
     return this.transactionSubscription as Subject<Transaction[]>;
   }
 }

@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Angular Training</title>
-    </head>
-    <body>
-        <stockdetails [symbol]='stock'></stockdetails>
-        <section class="stock-graph full-width">
-            <div id="stockGraphContainer" class="stock-graph__container"></div>
-        </section>
-        <stocktransactions [symbol]='stock'></stocktransactions>
-
-    </body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Angular Training</title>
+  </head>
+  <body>
+    <stockdetails [symbol]="stock"></stockdetails>
+    <stockdetailgraph></stockdetailgraph>
+    <stocktransactions [symbol]="stock"></stocktransactions>
+  </body>
 </html>

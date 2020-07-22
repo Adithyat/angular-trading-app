@@ -10,7 +10,7 @@
     <div class="modal__content">
       <div (click)="mshow = !mshow" class="modal__close">x</div>
       <h2 class="modal__h2">Select a new stock to follow</h2>
-      <select class="modal__dropdown" [(ngModel)]="follow" name="first">
+      <select class="modal__dropdown" [(ngModel)]="follow">
         <option *ngFor="let stock of stocks" value="{{ stock.symbol }}">{{
           stock.name
         }}</option>
@@ -33,4 +33,3 @@
     </div>
   </div>
 </section>
-

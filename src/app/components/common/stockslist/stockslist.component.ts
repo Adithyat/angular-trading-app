@@ -1,18 +1,43 @@
-import { Component, OnInit, Input } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  DoCheck,
+  KeyValueDiffers,
+} from "@angular/core";
 import { StockService } from "src/app/services";
-import { Stock } from "src/app/models/stock";
+import { Stock } from "src/app/models";
 @Component({
   selector: "stockslist",
   templateUrl: "./stockslist.component.html",
   styleUrls: ["./stockslist.component.css"],
 })
-export class StockslistComponent implements OnInit {
+export class StockslistComponent implements OnInit, DoCheck {
   @Input() stocksymbol: string;
   @Input() listtype: number;
   stock: Stock;
+  quantity: number = null;
+  isChanged: boolean = false;
+  differ: any;
+  objectGroup = [];
 
-  constructor(private stockService: StockService) {}
+  constructor(
+    private differs: KeyValueDiffers,
+    private stockService: StockService
+  ) {
+    this.objectGroup.forEach((item) => {
+      item.color = "new color";
+    });
+    this.differ = this.differs.find({}).create();
+  }
+  modelChanged(value) {
+    console.log("model changed");
 
+    this.isChanged = true;
+    setTimeout(() => {
+      this.isChanged = false;
+    }, 1000);
+  }
   ngOnInit() {
     this.stock = this.stockService.getStock(this.stocksymbol);
     // this.stock.symbol = this.stocksymbol;
@@ -27,11 +52,29 @@ export class StockslistComponent implements OnInit {
     //   });
     // }, 3000);
   }
+  ngDoCheck() {
+    const change = this.differ.diff(this);
+    if (change) {
+      change.forEachChangedItem((item) => {
+        console.log("item changed", item);
+      });
+    }
+  }
   buyStock(symbol: string) {
-    this.stockService.doTransaction(symbol, "BUY", 1);
+    let qty = 1;
+    if (this.quantity) {
+      qty = this.quantity;
+    }
+    this.stockService.doTransaction(symbol, "BUY", qty);
+    this.quantity = null;
   }
   sellStock(symbol: string) {
-    this.stockService.doTransaction(symbol, "SELL", 1);
+    let qty = 1;
+    if (this.quantity) {
+      qty = this.quantity;
+    }
+    this.stockService.doTransaction(symbol, "SELL", qty);
+    this.quantity = null;
   }
 
   // getPrices() {
