@@ -11,11 +11,10 @@ export class WatchlistService {
 
   constructor(private http: HttpClient) {}
 
-  getStockList(): Observable<
+  getAllStocks(): Observable<
     {
       name: string;
       symbol: string;
-      lastTick: { stock: string; price: number; date: Date };
     }[]
   > {
     return this.http.get<

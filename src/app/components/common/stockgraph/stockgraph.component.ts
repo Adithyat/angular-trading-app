@@ -1,169 +1,104 @@
-import { Component, OnInit, Input, AfterViewInit } from "@angular/core";
+import { Component, Input, OnChanges } from "@angular/core";
 import { Chart } from "angular-highcharts";
+import { GraphService, StockService } from "src/app/services";
 
 @Component({
   selector: "stockgraph",
   templateUrl: "./stockgraph.component.html",
   styleUrls: ["./stockgraph.component.css"],
 })
-export class StockgraphComponent implements OnInit, AfterViewInit {
+export class StockgraphComponent implements OnChanges {
   @Input() stocks: string[];
-  seriesOptions = [
-    {
-      type: "line",
-      data: [
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-      ],
-    },
-    {
-      type: "line",
-      data: [
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-      ],
-    },
-    {
-      type: "line",
-      data: [
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-        Math.floor(Math.random() * 10),
-      ],
-    },
-  ];
-  chart = new Chart({
-    chart: {
-      type: "line",
-    },
-    title: {
-      text: "Linechart",
-    },
-    credits: {
-      enabled: false,
-    },
-  });
-  add(symbol: string) {
-    console.log(this.stocks);
-    // this.chart.addSeries(
-    //   {
-    //     type: "line",
-    //     name: symbol,
-    //     data: [
-    //       Math.floor(Math.random() * 10),
-    //       Math.floor(Math.random() * 10),
-    //       Math.floor(Math.random() * 10),
-    //       Math.floor(Math.random() * 10),
-    //       Math.floor(Math.random() * 10),
-    //       Math.floor(Math.random() * 10),
-    //       Math.floor(Math.random() * 10),
-    //       Math.floor(Math.random() * 10),
-    //       Math.floor(Math.random() * 10),
-    //       Math.floor(Math.random() * 10),
-    //     ],
-    //   },
-    //   true,
-    //   false
-    // );
+  @Input() graphtype: number;
+  chart: Chart;
+  private activeSubcriptions = new Map();
+  addLine(symbol: string, d) {
+    this.chart.addSeries(
+      {
+        type: "line",
+        name: symbol,
+        data: d,
+      },
+      true,
+      false
+    );
   }
 
-  constructor() {}
+  constructor(
+    private graphService: GraphService,
+    private stockService: StockService
+  ) {}
 
-  ngOnInit() {
-    console.log(this.stocks);
+  ngOnChanges() {
+    this.selectYear();
   }
-  ngAfterViewInit() {
-    console.log(this.stocks);
+  getData(data) {
+    if (this.graphtype) {
+      return data.aggregated.map((p): { x: Date; y: Number } => ({
+        x: new Date(p.date),
+        y:
+          (p.price - Math.min(...data.aggregated.map((p) => p.price))) /
+          (Math.max(...data.aggregated.map((p) => p.price)) -
+            Math.min(...data.aggregated.map((p) => p.price))),
+      }));
+    } else {
+      this.addLine(
+        "STRK (aggregated)",
+        data.aggregated.map((p): { x: Date; y: Number } => ({
+          x: new Date(p.date),
+          y: p.price,
+        }))
+      );
+      return data.detailed.map((p): { x: Date; y: Number } => ({
+        x: new Date(p.date),
+        y: p.price,
+      }));
+    }
   }
-
-  // success(data) {
-  //   var name = this.url.match(/(msft|aapl|goog)/)[0].toUpperCase();
-  //   var i = this.names.indexOf(name);
-  //   this.seriesOptions[i] = {
-  //     name: name,
-  //     data: data
-  //   };
-
-  //   // As we're loading the data asynchronously, we don't know what order it
-  //   // will arrive. So we keep a counter and create the chart when all the data is loaded.
-  //   this.seriesCounter += 1;
-
-  //   if (this.seriesCounter === this.names.length) {
-  //     createChart();
-  //   }
-  // }
-
-  // Highcharts.getJSON(
-  //   'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/msft-c.json',
-  //   success
-  // );
-  // Highcharts.getJSON(
-  //   'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/aapl-c.json',
-  //   success
-  // );
-  // Highcharts.getJSON(
-  //   'https://cdn.jsdelivr.net/gh/highcharts/highcharts@v7.0.0/samples/data/goog-c.json',
-  //   success
-  // );
-
-  // createChart() {
-
-  //   Highcharts.stockChart('container', {
-
-  //     rangeSelector: {
-  //       selected: 4
-  //     },
-
-  //     yAxis: {
-  //       labels: {
-  //         formatter: function () {
-  //           return (this.value > 0 ? ' + ' : '') + this.value + '%';
-  //         }
-  //       },
-  //       plotLines: [{
-  //         value: 0,
-  //         width: 2,
-  //         color: 'silver'
-  //       }]
-  //     },
-
-  //     plotOptions: {
-  //       series: {
-  //         compare: 'percent',
-  //         showInNavigator: true
-  //       }
-  //     },
-
-  //     tooltip: {
-  //       pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.change}%)<br/>',
-  //       valueDecimals: 2,
-  //       split: true
-  //     },
-
-  //     series: this.seriesOptions
-  //   });
-  // }
+  createChart(period: string) {
+    this.chart = new Chart({
+      chart: {
+        type: "line",
+      },
+      title: {
+        text: period + " Stock Prices",
+      },
+      credits: {
+        enabled: false,
+      },
+      yAxis: {
+        max: this.graphtype,
+      },
+      xAxis: {
+        type: "datetime",
+      },
+    });
+  }
+  selectLive() {
+    this.createChart("Live");
+    this.addLine(this.stocks[0], []);
+    if (!this.activeSubcriptions[this.stocks[0]]) {
+      this.activeSubcriptions[this.stocks[0]] = setInterval(() => {
+        this.stockService.getLatestPrice(this.stocks[0]).subscribe((data) => {
+          this.chart.addPoint(data.price);
+        });
+      }, 5000);
+    }
+  }
+  selectToday() {
+    this.createChart("Todays");
+    this.stocks.forEach((stock) =>
+      this.graphService
+        .listenGraphToday(stock)
+        .subscribe((data) => this.addLine(stock, this.getData(data)))
+    );
+  }
+  selectYear() {
+    this.createChart("Yearly");
+    this.stocks.forEach((stock) =>
+      this.graphService
+        .listenGraphYear(stock)
+        .subscribe((data) => this.addLine(stock, this.getData(data)))
+    );
+  }
 }

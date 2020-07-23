@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { WatchlistService } from "src/app/services";
+import { Stock } from "src/app/models";
 
 @Component({
   selector: "watchliststocks",
@@ -15,7 +16,7 @@ export class WatchliststocksComponent implements OnInit {
 
   ngOnInit() {
     this.watchlistService
-      .getStockList()
+      .getAllStocks()
       .subscribe((data) =>
         data.map((s) => this.stocks.push({ name: s.name, symbol: s.symbol }))
       );

@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 
 @Component({
   selector: "stockdetailgraph",
@@ -6,6 +6,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./stockdetailgraph.component.css"],
 })
 export class StockdetailgraphComponent implements OnInit {
+  @Input() symbol: string[];
   constructor() {}
 
   ngOnInit() {}

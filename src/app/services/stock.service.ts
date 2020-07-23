@@ -2,8 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Observable, Subject } from "rxjs";
-import { Stock } from "src/app/models";
-import { Transaction } from "src/app/models";
+import { Stock, Transaction } from "src/app/models";
 
 @Injectable({
   providedIn: "root",

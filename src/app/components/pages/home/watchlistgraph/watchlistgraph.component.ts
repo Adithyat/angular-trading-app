@@ -8,11 +8,12 @@ import { WatchlistService } from "src/app/services";
 })
 export class WatchlistgraphComponent implements OnInit {
   follows: string[] = [];
+  graphtype: number = 0;
   constructor(private watchlistService: WatchlistService) {}
 
   ngOnInit() {
     this.watchlistService
       .listenWatchList()
-      .subscribe((data) => (this.follows = data.map((s): string => s.symbol)));
+      .subscribe((data) => (this.follows = data.map((s) => s.symbol)));
   }
 }
