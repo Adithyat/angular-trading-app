@@ -2,7 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Observable, Subject } from "rxjs";
-import { Stock, Transaction } from "src/app/models";
+import { Stock, Transaction, Tick } from "../models";
+import { WebsocketService } from "../services/websocket.service";
 
 @Injectable({
   providedIn: "root",
@@ -10,9 +11,11 @@ import { Stock, Transaction } from "src/app/models";
 export class StockService {
   private allocationSubscription = new Subject();
   private transactionSubscription = new Subject();
-  private activeSubcriptions = new Map();
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private webSocketService: WebsocketService
+  ) {}
 
   listenAllocations(): Subject<{ symbol: string; amount: number }[]> {
     this.http
@@ -31,31 +34,42 @@ export class StockService {
   //     environment.user
   //   );
   // }
-  getLatestPrice(
-    symbol: string
-  ): Observable<{ stock: string; price: number; date: Date }> {
-    return this.http.get<{ stock: string; price: number; date: Date }>(
+
+  getLatestPrice(symbol: string): Observable<Tick> {
+    return this.http.get<Tick>(
       `${environment.apiURL}stocks/${symbol}/price`,
       environment.user
     );
   }
+  listenPrice(symbol: string) {
+    let priceSubscription = new Subject<Tick>();
+    this.webSocketService.connect().then((client) => {
+      client.subscribe("/livestream/" + symbol, (update) => {
+        priceSubscription.next(new Tick(update));
+      });
+    });
+    return priceSubscription;
+  }
+
   getStock(symbol: string): Stock {
     let stock: Stock = {
       symbol: null,
       allocation: null,
       price: null,
     };
+
     stock.symbol = symbol;
     this.listenAllocations().subscribe((data) => {
       stock.allocation = data.find((d) => d.symbol === symbol).amount;
     });
-    if (!this.activeSubcriptions[symbol]) {
-      this.activeSubcriptions[symbol] = setInterval(() => {
-        this.getLatestPrice(symbol).subscribe((data) => {
-          stock.price = data.price;
-        });
-      }, 5000);
-    }
+
+    // if (!this.activeSubcriptions[symbol]) {
+    //   this.activeSubcriptions[symbol] = setInterval(() => {
+    //     this.getLatestPrice(symbol).subscribe((data) => {
+    //       stock.price = data.price;
+    //     });
+    //   }, 5000);
+    // }
     return stock;
   }
 

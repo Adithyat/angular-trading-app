@@ -11,19 +11,8 @@ export class WatchlistService {
 
   constructor(private http: HttpClient) {}
 
-  getAllStocks(): Observable<
-    {
-      name: string;
-      symbol: string;
-    }[]
-  > {
-    return this.http.get<
-      {
-        name: string;
-        symbol: string;
-        lastTick: { stock: string; price: number; date: Date };
-      }[]
-    >(`${environment.apiURL}stocks`);
+  getAllStocks(): Observable<any> {
+    return this.http.get<any>(`${environment.apiURL}stocks`);
   }
   listenWatchList(): Subject<{ symbol: string }[]> {
     this.http

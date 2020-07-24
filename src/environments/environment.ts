@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiURL: "https://demomocktradingserver.azurewebsites.net/",
+  webSocketURL: "wss://demomocktradingserver.azurewebsites.net/",
   user: { headers: { userid: "adithya" } },
 };
 

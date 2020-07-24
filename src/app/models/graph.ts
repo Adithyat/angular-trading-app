@@ -3,6 +3,6 @@ export class Graph {
   aggregated: Point[];
 }
 export class Point {
-  date: string;
+  date: Date;
   price: number;
 }

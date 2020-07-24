@@ -1,0 +1,12 @@
+<section class="stock-transactions full-width" >
+  <div class="stock-transactions__grid-row">
+      <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text stock-transactions__grid-text--white">stock</span></div>
+      <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text stock-transactions__grid-text--white">amount</span></div>
+      <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text stock-transactions__grid-text--white">current price</span></div>
+      <div class="stock-transactions__grid-cell"><span class="stock-transactions__grid-text stock-transactions__grid-text--white">total</span></div>
+      <div class="stock-transactions__grid-cell"></div>
+  </div>
+  <div class="stock-transactions__grid-row" *ngFor="let symbol of allocations">
+    <stockslist [stocksymbol]="symbol" [listtype]="1"></stockslist>
+  </div>
+</section>

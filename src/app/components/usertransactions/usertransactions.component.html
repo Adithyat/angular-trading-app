@@ -1,0 +1,56 @@
+<section class="stock-transactions full-width">
+  <div class="stock-transactions__grid-row">
+    <div class="stock-transactions__grid-cell">
+      <span
+        class="stock-transactions__grid-text stock-transactions__grid-text--white"
+        >Transaction ID</span
+      >
+    </div>
+    <div class="stock-transactions__grid-cell">
+      <span
+        class="stock-transactions__grid-text stock-transactions__grid-text--white"
+        >stock</span
+      >
+    </div>
+    <div class="stock-transactions__grid-cell">
+      <span
+        class="stock-transactions__grid-text stock-transactions__grid-text--white"
+        >amount</span
+      >
+    </div>
+    <div class="stock-transactions__grid-cell">
+      <span
+        class="stock-transactions__grid-text stock-transactions__grid-text--white"
+        >direction</span
+      >
+    </div>
+    <div class="stock-transactions__grid-cell">
+      <span
+        class="stock-transactions__grid-text stock-transactions__grid-text--white"
+        >price</span
+      >
+    </div>
+    <div class="stock-transactions__grid-cell">
+      <span
+        class="stock-transactions__grid-text stock-transactions__grid-text--white"
+        >total</span
+      >
+    </div>
+  </div>
+  <div
+    class="stock-transactions__grid-row"
+    *ngFor="
+      let transaction of transactions
+        | paginate: { itemsPerPage: 10, currentPage: p };
+      let i = index
+    "
+  >
+    <transactionslist
+      [transaction]="transaction"
+      [index]="i + 1"
+    ></transactionslist>
+
+  </div>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</section>
+

@@ -11,9 +11,6 @@ import {
   StockslistComponent,
   TransactionslistComponent,
   StockgraphComponent,
-  HomeComponent,
-  AssetsComponent,
-  DetailsComponent,
   WatchliststocksComponent,
   UsertransactionsComponent,
   WatchlistgraphComponent,
@@ -22,6 +19,7 @@ import {
   StockdetailgraphComponent,
   UserallocationsComponent,
 } from "./components";
+import { HomeComponent, AssetsComponent, DetailsComponent } from "./pages";
 
 @NgModule({
   declarations: [
