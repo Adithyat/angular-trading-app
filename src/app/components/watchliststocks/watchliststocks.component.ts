@@ -28,7 +28,7 @@ export class WatchliststocksComponent implements OnInit {
     this.watchlistService.changeWatchList(symbol, "ADD");
   }
   removeStock(symbol: string) {
-    console.log(symbol);
+    //console.log(symbol);
     this.watchlistService.changeWatchList(symbol, "REMOVE");
   }
 }
