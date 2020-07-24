@@ -16,6 +16,7 @@ export class StockslistComponent implements OnInit {
   ngOnInit() {
     this.stock = this.stockService.getStock(this.stocksymbol);
     this.stockService.listenPrice(this.stocksymbol).subscribe((data: Tick) => {
+      console.log(this.stock.price);
       this.stock.price = data.price;
     });
   }
@@ -33,7 +34,9 @@ export class StockslistComponent implements OnInit {
     if (this.quantity) {
       qty = this.quantity;
     }
-    this.stockService.doTransaction(symbol, "SELL", qty);
+    if (qty <= this.stock.allocation) {
+      this.stockService.doTransaction(symbol, "SELL", qty);
+    }
     this.quantity = null;
   }
 

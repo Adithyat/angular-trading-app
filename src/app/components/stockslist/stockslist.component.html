@@ -18,7 +18,7 @@
     >
   </div>
   <div class="stock-list__grid-cell">
-    <a (click)="sellStock(stocksymbol)"
+    <a (click)="sellStock(stocksymbol)" *ngIf="stock.allocation"
       ><span class="btn-transaction btn-transaction--sell">sell</span></a
     >
   </div>
