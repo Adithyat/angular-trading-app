@@ -47,7 +47,6 @@ all user stocks (stock)
 -price(live)
 -amount
 
-
 stock graph (stock)
 -name
 -price(live)
@@ -74,10 +73,15 @@ all user stocks -userstocks
 single stock graph -stockgraph
 single stock user transactions -userstocktransactions
 
-
-
 services
-stocks by all user follows,  single specified, all user, 
+stocks by all user follows, single specified, all user,
 transactions all user, single specified
 graphs
 actions
+
+TODO:
+css fader
+css improvements
+live->today bugs
+transactions table css width
+trackbyFN
